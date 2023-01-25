@@ -61,6 +61,9 @@ class MainActivity : AppCompatActivity() {
                 startService(MyIntentServiceNotForeground.newIntent(this, page++))
             }
         }
+        binding.jobIntentService.setOnClickListener {
+            MyJobIntentService.enqueue(this, page++)
+        }
     }
 
     private fun showNotification() {
