@@ -32,7 +32,7 @@ class MyJobService : JobService() {
                     params?.completeWork(workItem)
                     workItem = params?.dequeueWork()
                 }
-                jobFinished(params, false)
+                jobFinished(params, true)
             }
         }
         return true

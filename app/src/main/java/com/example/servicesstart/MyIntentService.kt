@@ -27,7 +27,7 @@ class MyIntentService : IntentService(NAME) {
             log("Timer $i")
         }
     }
-
+    
     override fun onDestroy() {
         super.onDestroy()
         log("onDestroy")

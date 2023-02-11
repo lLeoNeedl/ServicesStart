@@ -52,7 +52,8 @@ class MainActivity : AppCompatActivity() {
 
             val jobInfo = JobInfo.Builder(JOB_ID, componentName)
                 .setRequiresCharging(true)
-                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+//                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                 .build()
             val jobScheduler = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
 
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             val workManager = WorkManager.getInstance(applicationContext)
             workManager.enqueueUniqueWork(
                 MyWorker.WORK_NAME,
-                ExistingWorkPolicy.APPEND,
+                ExistingWorkPolicy.APPEND_OR_REPLACE,
                 MyWorker.makeRequest(page++)
             )
         }

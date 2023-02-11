@@ -37,7 +37,7 @@ class MyWorker(
 
         private fun makeConstraints() = Constraints.Builder()
             .setRequiresCharging(true)
-            .setRequiredNetworkType(NetworkType.UNMETERED)
+//            .setRequiredNetworkType(NetworkType.UNMETERED)
             .build()
     }
 }
