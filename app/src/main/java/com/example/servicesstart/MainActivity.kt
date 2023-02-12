@@ -1,7 +1,9 @@
 package com.example.servicesstart
 
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
 import android.app.job.JobWorkItem
@@ -17,6 +19,7 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import com.example.servicesstart.MyJobService.Companion.JOB_ID
 import com.example.servicesstart.databinding.ActivityMainBinding
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -91,6 +94,19 @@ class MainActivity : AppCompatActivity() {
                 ExistingWorkPolicy.APPEND_OR_REPLACE,
                 MyWorker.makeRequest(page++)
             )
+        }
+        binding.alarmManager.setOnClickListener {
+            val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.SECOND, 30)
+            val intent = AlarmReceiver.newIntent(this)
+            val pendingIntent = PendingIntent.getBroadcast(
+                this,
+                100,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE
+            )
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
         }
     }
 
